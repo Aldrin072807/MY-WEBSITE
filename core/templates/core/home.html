@@ -1,0 +1,50 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Home - My Website{% endblock %}
+
+{% block content %}
+<div class="p-5 text-center bg-white rounded-3 shadow-sm hero-card mb-5">
+    <h1 class="text-body-emphasis display-4 fw-bold">Welcome to My Website</h1>
+    <p class="col-lg-8 mx-auto fs-5 text-muted mt-3">
+        This page inherits its layout directly from <code>base.html</code> and displays dynamic projects from SQLite.
+    </p>
+    <div class="d-inline-flex gap-2 mt-3">
+        <a href="#projects" class="btn btn-primary btn-lg px-4 rounded-pill">View Projects</a>
+    </div>
+</div>
+
+<!-- Projects Grid Section -->
+<div id="projects" class="container">
+    <h2 class="fw-bold mb-4 text-center">Featured Projects</h2>
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        {% for project in projects %}
+        <div class="col">
+            <div class="card h-100 shadow-sm border-0">
+                {% if project.image %}
+                    <img src="{{ project.image.url }}" class="card-img-top" alt="{{ project.title }}" style="height: 200px; object-fit: cover;">
+                {% else %}
+                    <div class="bg-secondary text-white d-flex align-items-center justify-content-center" style="height: 200px;">
+                        <span>No Image Available</span>
+                    </div>
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title fw-bold">
+                        <a href="{% url 'project_detail' project.id %}" class="text-decoration-none text-dark">
+                            {{ project.title }}
+                        </a>
+                    </h5>
+                    <p class="card-text text-muted">{{ project.description|truncatewords:20 }}</p>
+                </div>
+                <div class="card-footer bg-transparent border-0 pb-3">
+                    <span class="badge bg-primary">{{ project.technology }}</span>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12 text-center text-muted py-5">
+            <p class="fs-5">No projects added yet. Log into <a href="/admin/" target="_blank">Django Admin</a> to create your first project!</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
