@@ -1,0 +1,25 @@
+{% extends 'core/base.html' %}
+
+{% block title %}{{ project.title }} - My Website{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <a href="{% url 'home' %}" class="btn btn-outline-secondary mb-4">&larr; Back to Home</a>
+        
+        <h1 class="display-5 fw-bold mb-3">{{ project.title }}</h1>
+        <p class="text-muted">Posted on {{ project.created_at|date:"F j, Y" }}</p>
+        
+        <span class="badge bg-primary fs-6 mb-4">{{ project.technology }}</span>
+
+        {% if project.image %}
+            <img src="{{ project.image.url }}" class="img-fluid rounded shadow-sm mb-4 w-100" alt="{{ project.title }}">
+        {% endif %}
+
+        <div class="bg-white p-4 rounded shadow-sm">
+            <h4 class="fw-bold mb-3">About this Project</h4>
+            <p class="lead text-secondary" style="white-space: pre-line;">{{ project.description }}</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
