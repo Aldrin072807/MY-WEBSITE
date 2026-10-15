@@ -1,25 +1,52 @@
 {% extends 'core/base.html' %}
 
-{% block title %}{{ project.title }} - My Website{% endblock %}
+{% block title %}{{ project.title }} - MY-WEBSITE{% endblock %}
 
 {% block content %}
-<div class="row justify-content-center">
-    <div class="col-lg-8">
-        <a href="{% url 'home' %}" class="btn btn-outline-secondary mb-4">&larr; Back to Home</a>
-        
-        <h1 class="display-5 fw-bold mb-3">{{ project.title }}</h1>
-        <p class="text-muted">Posted on {{ project.created_at|date:"F j, Y" }}</p>
-        
-        <span class="badge bg-primary fs-6 mb-4">{{ project.technology }}</span>
+<div class="mb-4">
+    <a href="{% url 'home' %}#projects" class="text-secondary text-decoration-none d-inline-flex align-items-center gap-2 mb-3" style="font-size: 0.9rem;">
+        <i class="fa-solid fa-arrow-left" style="color: #ffd700;"></i> Back to Projects
+    </a>
+</div>
 
-        {% if project.image %}
-            <img src="{{ project.image.url }}" class="img-fluid rounded shadow-sm mb-4 w-100" alt="{{ project.title }}">
+<div class="card-dark overflow-hidden mb-5">
+    {% if project.image %}
+        <div style="max-height: 400px; overflow: hidden; background: #000;">
+            <img src="{{ project.image.url }}" alt="{{ project.title }}" class="w-100" style="object-fit: cover; opacity: 0.9;">
+        </div>
+    {% endif %}
+
+    <div class="p-4 p-md-5">
+        <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-3">
+            <h1 class="display-6 fw-bold text-white mb-0">{{ project.title }}</h1>
+            {% if project.created_at %}
+                <span class="badge bg-dark text-secondary border border-secondary px-3 py-2">
+                    <i class="fa-regular fa-calendar me-1"></i> {{ project.created_at|date:"F d, Y" }}
+                </span>
+            {% endif %}
+        </div>
+
+        <hr style="border-color: rgba(255,255,255,0.1);" class="my-4">
+
+        <h5 class="text-white fw-bold mb-3"><i class="fa-solid fa-circle-info me-2" style="color: #ffd700;"></i>Project Overview</h5>
+        <div class="text-secondary lead mb-4" style="font-weight: 300; line-height: 1.7;">
+            {{ project.description|linebreaks }}
+        </div>
+
+        {% if project.technology_stack %}
+        <div class="mb-4">
+            <h6 class="text-white fw-semibold mb-2">Technologies Used</h6>
+            <p class="text-warning fw-semibold mb-0" style="color: #ffd700 !important;">{{ project.technology_stack }}</p>
+        </div>
         {% endif %}
 
-        <div class="bg-white p-4 rounded shadow-sm">
-            <h4 class="fw-bold mb-3">About this Project</h4>
-            <p class="lead text-secondary" style="white-space: pre-line;">{{ project.description }}</p>
+        {% if project.link %}
+        <div class="pt-3">
+            <a href="{{ project.link }}" target="_blank" class="btn btn-warning rounded-pill px-4 fw-bold" style="background: #ffd700; border: none; color: #0c0d0e;">
+                Visit Live Project <i class="fa-solid fa-arrow-up-right-from-square ms-1"></i>
+            </a>
         </div>
+        {% endif %}
     </div>
 </div>
 {% endblock %}

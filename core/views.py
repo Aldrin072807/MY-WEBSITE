@@ -5,6 +5,11 @@ from django.contrib import messages
 from .models import Project
 from .forms import ContactForm, LampLoginForm
 
+def landing(request):
+    if request.user.is_authenticated:
+        return redirect('home')
+    return render(request, 'core/landing.html')
+
 def login_view(request):
     if request.user.is_authenticated:
         return redirect('home')
