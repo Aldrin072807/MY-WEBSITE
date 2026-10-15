@@ -1,48 +1,68 @@
 {% extends 'core/base.html' %}
 
-{% block title %}Home - My Website{% endblock %}
+{% block title %}Home - MY-WEBSITE{% endblock %}
 
 {% block content %}
-<div class="p-5 text-center bg-white rounded-3 shadow-sm hero-card mb-5">
-    <h1 class="text-body-emphasis display-4 fw-bold">Welcome to My Website</h1>
-    <p class="col-lg-8 mx-auto fs-5 text-muted mt-3">
-        This page inherits its layout directly from <code>base.html</code> and displays dynamic projects from SQLite.
+<!-- Welcome Hero Card -->
+<div class="card-dark p-5 mb-5 text-center position-relative overflow-hidden">
+    <div style="position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 300px; height: 300px; background: radial-gradient(circle, rgba(255,215,0,0.08) 0%, transparent 70%); pointer-events: none;"></div>
+    
+    <span class="badge rounded-pill px-3 py-2 mb-3" style="background: rgba(255,215,0,0.1); color: #ffd700; border: 1px solid rgba(255,215,0,0.3); font-weight: 600;">
+        <i class="fa-solid fa-sparkles me-1"></i> WELCOME DASHBOARD
+    </span>
+    
+    <h1 class="display-4 fw-bold text-white mb-3">Welcome Back to Your Portal</h1>
+    <p class="lead text-secondary mx-auto mb-4" style="max-width: 650px; font-weight: 300;">
+        Explore active development projects, check dynamic database updates, and interact with web utilities seamlessly.
     </p>
-    <div class="d-inline-flex gap-2 mt-3">
-        <a href="#projects" class="btn btn-primary btn-lg px-4 rounded-pill">View Projects</a>
+    
+    <div>
+        <a href="#projects" class="btn btn-warning btn-lg rounded-pill px-4 fw-bold" style="background: #ffd700; border: none; color: #0c0d0e; box-shadow: 0 0 20px rgba(255,215,0,0.2);">
+            View Projects <i class="fa-solid fa-arrow-down ms-2"></i>
+        </a>
     </div>
 </div>
 
-<!-- Projects Grid Section -->
-<div id="projects" class="container">
-    <h2 class="fw-bold mb-4 text-center">Featured Projects</h2>
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+<!-- Featured Projects Section -->
+<div id="projects" class="pt-3">
+    <div class="d-flex align-items-center justify-content-between mb-4">
+        <div>
+            <h2 class="h3 fw-bold text-white mb-1">Featured Projects</h2>
+            <p class="text-secondary mb-0">Dynamic items pulled directly from your SQLite database.</p>
+        </div>
+    </div>
+
+    <div class="row g-4">
         {% for project in projects %}
-        <div class="col">
-            <div class="card h-100 shadow-sm border-0">
+        <div class="col-md-6 col-lg-4">
+            <div class="card-dark h-100 overflow-hidden d-flex flex-column">
                 {% if project.image %}
                     <img src="{{ project.image.url }}" class="card-img-top" alt="{{ project.title }}" style="height: 200px; object-fit: cover;">
                 {% else %}
-                    <div class="bg-secondary text-white d-flex align-items-center justify-content-center" style="height: 200px;">
-                        <span>No Image Available</span>
+                    <div class="d-flex align-items-center justify-content-center bg-dark text-secondary" style="height: 200px;">
+                        <i class="fa-solid fa-folder-open fa-3x" style="color: #ffd700; opacity: 0.5;"></i>
                     </div>
                 {% endif %}
-                <div class="card-body">
-                    <h5 class="card-title fw-bold">
-                        <a href="{% url 'project_detail' project.id %}" class="text-decoration-none text-dark">
-                            {{ project.title }}
-                        </a>
-                    </h5>
-                    <p class="card-text text-muted">{{ project.description|truncatewords:20 }}</p>
-                </div>
-                <div class="card-footer bg-transparent border-0 pb-3">
-                    <span class="badge bg-primary">{{ project.technology }}</span>
+                
+                <div class="card-body p-4 d-flex flex-column">
+                    <h5 class="card-title fw-bold text-white mb-2">{{ project.title }}</h5>
+                    <p class="card-text text-secondary mb-4 flex-grow-1" style="font-size: 0.95rem;">
+                        {{ project.description|truncatewords:20 }}
+                    </p>
+                    
+                    <a href="{% url 'project_detail' project.pk %}" class="btn btn-outline-light rounded-pill w-100 fw-semibold" style="border-color: rgba(255,255,255,0.15); color: #e1e1e1;">
+                        Project Details <i class="fa-solid fa-chevron-right ms-1" style="font-size: 0.8rem; color: #ffd700;"></i>
+                    </a>
                 </div>
             </div>
         </div>
         {% empty %}
-        <div class="col-12 text-center text-muted py-5">
-            <p class="fs-5">No projects added yet. Log into <a href="/admin/" target="_blank">Django Admin</a> to create your first project!</p>
+        <div class="col-12 text-center py-5">
+            <div class="card-dark p-5">
+                <i class="fa-solid fa-folder-minus fa-3x mb-3" style="color: #ffd700; opacity: 0.4;"></i>
+                <h4 class="text-white">No Projects Found</h4>
+                <p class="text-secondary">Add projects in the Django Admin portal to showcase them here.</p>
+            </div>
         </div>
         {% endfor %}
     </div>

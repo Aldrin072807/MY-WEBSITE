@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome - My Website</title>
+    <!-- Outfit Font & FontAwesome Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* Base color on BODY - blend modes composite against this */
+        body {
+            background-color: #100e0b;
+            margin: 0;
+            padding: 0;
+            font-family: 'Outfit', sans-serif;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        .aura-bg {
+            position: relative;
+            overflow: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Layer 1 - screen */
+        .aura-layer-1 {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(55.8% 55.49% at 50% 100%, rgb(38, 77, 76) 0%, rgba(25, 48, 47, 0) 100%);
+            mix-blend-mode: screen;
+            transform: translateZ(0);
+            will-change: transform;
+            pointer-events: none;
+        }
+
+        /* Layer 2 - screen */
+        .aura-layer-2 {
+            position: absolute;
+            inset: 0;
+            background: 
+                repeating-linear-gradient(
+                    100deg,
+                    #262626 0%,
+                    #262626 3%,
+                    rgba(38, 38, 38, 0.7) 5%,
+                    rgba(38, 38, 38, 0.7) 7%,
+                    transparent 10%,
+                    transparent 12%,
+                    rgba(38, 38, 38, 0.7) 14%,
+                    #262626 16%
+                ),
+                repeating-linear-gradient(
+                    100deg,
+                    #9ca3af 0%,
+                    #9ca3af 1.5%,
+                    rgba(156, 163, 175, 0.8) 2%,
+                    #6b7280 3%,
+                    #6b7280 4%,
+                    rgba(156, 163, 175, 0.8) 4.5%,
+                    #9ca3af 5%
+                );
+            background-size: 300% 200%;
+            mix-blend-mode: screen;
+            filter: blur(108px);
+            opacity: 0.9;
+            transform: translateZ(0);
+            will-change: transform;
+            pointer-events: none;
+        }
+
+        /* Layer 3 - multiply */
+        .aura-layer-3 {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at 100% 100%, #ffffff 20%, #0a0a0a 80%);
+            mix-blend-mode: multiply;
+            transform: translateZ(0);
+            will-change: transform;
+            pointer-events: none;
+        }
+
+        /* Film-grain overlay - SVG feTurbulence noise */
+        .aura-grain {
+            position: absolute;
+            inset: 0;
+            mix-blend-mode: overlay;
+            opacity: 0.85;
+            pointer-events: none;
+        }
+
+        /* Content Layer */
+        .content-container {
+            position: relative;
+            z-index: 1;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 2rem 4rem;
+            box-sizing: border-box;
+        }
+
+        /* Navigation */
+        .nav-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        .brand-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            color: #ffffff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .brand-logo i {
+            color: #ffd700;
+        }
+
+        .nav-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #ffffff;
+            padding: 0.6rem 1.4rem;
+            border-radius: 50px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-btn:hover {
+            background: #ffd700;
+            color: #0c0d0e;
+            border-color: #ffd700;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            margin: auto 0;
+            padding: 3rem 0;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 215, 0, 0.1);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            color: #ffd700;
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -1.5px;
+            max-width: 900px;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(180deg, #ffffff 0%, rgba(255, 255, 255, 0.65) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: #a1a1aa;
+            max-width: 650px;
+            line-height: 1.6;
+            margin-bottom: 2.5rem;
+            font-weight: 300;
+        }
+
+        .cta-group {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .btn-primary-aura {
+            background: #ffd700;
+            color: #0c0d0e;
+            padding: 1rem 2.2rem;
+            border-radius: 50px;
+            font-size: 1.05rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 25px rgba(255, 215, 0, 0.25);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-primary-aura:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 35px rgba(255, 215, 0, 0.4);
+            background: #ffea00;
+        }
+
+        /* Footer */
+        .footer-simple {
+            text-align: center;
+            color: #71717a;
+            font-size: 0.85rem;
+            padding-top: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .content-container {
+                padding: 1.5rem;
+            }
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="aura-bg">
+        <!-- Layer 1 -->
+        <div class="aura-layer-1" aria-hidden="true"></div>
+
+        <!-- Layer 2 -->
+        <div class="aura-layer-2" aria-hidden="true"></div>
+
+        <!-- Layer 3 -->
+        <div class="aura-layer-3" aria-hidden="true"></div>
+
+        <!-- Film Grain Overlay -->
+        <div class="aura-grain" aria-hidden="true">
+            <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+                <filter id="grain">
+                    <feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="4" stitchTiles="stitch"/>
+                    <feColorMatrix type="matrix" values="0.181 0.608 0.061 0 0.075 0.181 0.608 0.061 0 0.075 0.181 0.608 0.061 0 0.075 0 0 0 1 0"/>
+                </filter>
+                <rect width="100%" height="100%" filter="url(#grain)"/>
+            </svg>
+        </div>
+
+        <!-- Content Area -->
+        <div class="content-container">
+            <!-- Header Nav -->
+            <header class="nav-header">
+                <a href="{% url 'landing' %}" class="brand-logo">
+                    <i class="fa-solid fa-code"></i> MY-WEBSITE
+                </a>
+                <a href="{% url 'login' %}" class="nav-btn">Sign In</a>
+            </header>
+
+            <!-- Hero Main -->
+            <main class="hero-section">
+                <div class="hero-badge">
+                    <i class="fa-solid fa-sparkles"></i> Welcome to My Platform
+                </div>
+                <h1 class="hero-title">Crafting Modern Web Experiences with Django</h1>
+                <p class="hero-subtitle">Explore portfolio applications, network architectures, and custom engineering projects built with clean backend logic and responsive design.</p>
+                
+                <div class="cta-group" style="justify-content: center;">
+                    <a href="{% url 'login' %}" class="btn-primary-aura">
+                        Get Started <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </div>
+            </main>
+
+            <!-- Footer -->
+            <footer class="footer-simple">
+                <p>&copy; {% now "Y" %} MY-WEBSITE. Built with Python & Django.</p>
+            </footer>
+        </div>
+    </div>
+
+</body>
+</html>

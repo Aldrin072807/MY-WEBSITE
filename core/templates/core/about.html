@@ -1,26 +1,77 @@
 {% extends 'core/base.html' %}
 
-{% block title %}About - My Website{% endblock %}
+{% block title %}About - MY-WEBSITE{% endblock %}
 
 {% block content %}
-<div class="row justify-content-center">
-    <div class="col-lg-8">
-        <div class="bg-white p-5 rounded-3 shadow-sm mb-4">
-            <h1 class="display-5 fw-bold mb-3">About Me</h1>
-            <p class="lead text-secondary">
-                Computer Engineering student passionate about web development, network infrastructure, and building functional applications.
-            </p>
-            <hr class="my-4">
-            <h4 class="fw-bold mb-3">Technical Stack</h4>
-            <div class="d-flex flex-wrap gap-2">
-                <span class="badge bg-primary fs-6">Python</span>
-                <span class="badge bg-primary fs-6">Django</span>
-                <span class="badge bg-secondary fs-6">HTML5 / CSS3</span>
-                <span class="badge bg-secondary fs-6">Bootstrap 5</span>
-                <span class="badge bg-dark fs-6">Git / GitHub</span>
-                <span class="badge bg-dark fs-6">SQLite</span>
-                <span class="badge bg-info text-dark fs-6">Cisco Packet Tracer</span>
+<div class="row g-4 align-items-center mb-5">
+    <div class="col-lg-7">
+        <span class="badge rounded-pill px-3 py-2 mb-3" style="background: rgba(255,215,0,0.1); color: #ffd700; border: 1px solid rgba(255,215,0,0.3); font-weight: 600;">
+            <i class="fa-solid fa-user me-1"></i> ABOUT ME
+        </span>
+        <h1 class="display-5 fw-bold text-white mb-3">Computer Engineer & Full-Stack Developer</h1>
+        <p class="text-secondary lead mb-4" style="font-weight: 300;">
+            Passionate about constructing scalable web platforms, designing network topographies, and implementing clean backend logic with Python and Django.
+        </p>
+        <div class="d-flex gap-3">
+            <a href="{% url 'contact' %}" class="btn btn-warning rounded-pill px-4 fw-bold" style="background: #ffd700; border: none; color: #0c0d0e;">
+                Get in Touch <i class="fa-solid fa-arrow-right ms-1"></i>
+            </a>
+            <a href="{% url 'home' %}#projects" class="btn btn-outline-light rounded-pill px-4 fw-semibold" style="border-color: rgba(255,255,255,0.15);">
+                View Work
+            </a>
+        </div>
+    </div>
+    <div class="col-lg-5">
+        <div class="card-dark p-4 position-relative overflow-hidden">
+            <div style="position: absolute; top: -50px; right: -50px; width: 150px; height: 150px; background: radial-gradient(circle, rgba(255,215,0,0.15) 0%, transparent 70%); pointer-events: none;"></div>
+            <h5 class="text-white fw-bold mb-3"><i class="fa-solid fa-code-branch me-2" style="color: #ffd700;"></i>Core Tech Stack</h5>
+            
+            <div class="d-flex flex-wrap gap-2 mb-4">
+                <span class="badge bg-dark text-white border border-secondary px-3 py-2">Python</span>
+                <span class="badge bg-dark text-white border border-secondary px-3 py-2">Django</span>
+                <span class="badge bg-dark text-white border border-secondary px-3 py-2">SQLite / PostgreSQL</span>
+                <span class="badge bg-dark text-white border border-secondary px-3 py-2">C++</span>
+                <span class="badge bg-dark text-white border border-secondary px-3 py-2">Git & GitHub</span>
+                <span class="badge bg-dark text-white border border-secondary px-3 py-2">Cisco Packet Tracer</span>
+                <span class="badge bg-dark text-white border border-secondary px-3 py-2">Bootstrap 5</span>
             </div>
+
+            <hr style="border-color: rgba(255,255,255,0.1);">
+
+            <div class="d-flex align-items-center justify-content-between pt-2">
+                <div>
+                    <small class="text-secondary d-block">Focus Area</small>
+                    <span class="text-white fw-semibold">Web & Network Systems</span>
+                </div>
+                <div>
+                    <small class="text-secondary d-block">Status</small>
+                    <span class="text-warning fw-semibold" style="color: #ffd700 !important;">Available for Projects</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row g-4">
+    <div class="col-md-4">
+        <div class="card-dark p-4 h-100">
+            <i class="fa-solid fa-layer-group fa-2x mb-3" style="color: #ffd700;"></i>
+            <h5 class="text-white fw-bold">Backend Architecture</h5>
+            <p class="text-secondary mb-0">Building robust URL routing, custom authentication forms, ORM data models, and database migrations.</p>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card-dark p-4 h-100">
+            <i class="fa-solid fa-palette fa-2x mb-3" style="color: #ffd700;"></i>
+            <h5 class="text-white fw-bold">Responsive UI/UX</h5>
+            <p class="text-secondary mb-0">Crafting sleek dark-mode interfaces, glassmorphism cards, CSS blend modes, and cohesive brand systems.</p>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card-dark p-4 h-100">
+            <i class="fa-solid fa-network-wired fa-2x mb-3" style="color: #ffd700;"></i>
+            <h5 class="text-white fw-bold">Network Engineering</h5>
+            <p class="text-secondary mb-0">Designing subnets, switch/router configurations, and topological troubleshooting in physical labs.</p>
         </div>
     </div>
 </div>

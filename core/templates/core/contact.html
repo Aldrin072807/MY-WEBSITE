@@ -1,41 +1,78 @@
 {% extends 'core/base.html' %}
 
-{% block title %}Contact - My Website{% endblock %}
+{% block title %}Contact - MY-WEBSITE{% endblock %}
 
 {% block content %}
-<div class="row justify-content-center">
+<div class="row g-4 justify-content-center">
+    <div class="col-lg-5">
+        <div class="card-dark p-4 h-100 d-flex flex-column justify-content-between">
+            <div>
+                <span class="badge rounded-pill px-3 py-2 mb-3" style="background: rgba(255,215,0,0.1); color: #ffd700; border: 1px solid rgba(255,215,0,0.3); font-weight: 600;">
+                    <i class="fa-solid fa-envelope me-1"></i> GET IN TOUCH
+                </span>
+                <h2 class="fw-bold text-white mb-3">Let's Connect</h2>
+                <p class="text-secondary mb-4">Have a question or want to collaborate on a project? Send a message and I'll get back to you as soon as possible.</p>
+                
+                <div class="d-flex align-items-center gap-3 mb-3">
+                    <div class="rounded-circle p-3 d-flex align-items-center justify-content-center" style="background: rgba(255,215,0,0.1); width: 48px; height: 48px;">
+                        <i class="fa-solid fa-paper-plane" style="color: #ffd700;"></i>
+                    </div>
+                    <div>
+                        <small class="text-secondary d-block">Direct Message</small>
+                        <span class="text-white fw-semibold">Send a message via the form</span>
+                    </div>
+                </div>
+
+                <div class="d-flex align-items-center gap-3">
+                    <div class="rounded-circle p-3 d-flex align-items-center justify-content-center" style="background: rgba(255,215,0,0.1); width: 48px; height: 48px;">
+                        <i class="fa-solid fa-shield-halved" style="color: #ffd700;"></i>
+                    </div>
+                    <div>
+                        <small class="text-secondary d-block">Response Time</small>
+                        <span class="text-white fw-semibold">Usually within 24 hours</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pt-4 border-top" style="border-color: rgba(255,255,255,0.1) !important;">
+                <p class="text-secondary small mb-0">&copy; Messages stored directly in the database admin dashboard.</p>
+            </div>
+        </div>
+    </div>
+
     <div class="col-lg-7">
-        <div class="bg-white p-5 rounded-3 shadow-sm">
-            <h1 class="display-6 fw-bold mb-4">Get In Touch</h1>
+        <div class="card-dark p-4 p-md-5">
+            <h3 class="fw-bold text-white mb-4">Send a Message</h3>
 
             {% if messages %}
                 {% for message in messages %}
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        {{ message }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    <div class="alert alert-success bg-dark text-warning border-warning mb-4" role="alert">
+                        <i class="fa-solid fa-circle-check me-2"></i>{{ message }}
                     </div>
                 {% endfor %}
             {% endif %}
 
             <form method="post">
                 {% csrf_token %}
+                
                 <div class="mb-3">
-                    <label class="form-label fw-semibold">Name</label>
-                    {{ form.name }}
+                    <label class="form-label text-secondary small fw-semibold">YOUR NAME</label>
+                    <input type="text" name="name" class="form-control bg-dark text-white border-secondary" style="border-color: rgba(255,255,255,0.15) !important; padding: 0.75rem;" placeholder="Enter your full name" required>
                 </div>
+
                 <div class="mb-3">
-                    <label class="form-label fw-semibold">Email</label>
-                    {{ form.email }}
+                    <label class="form-label text-secondary small fw-semibold">EMAIL ADDRESS</label>
+                    <input type="email" name="email" class="form-control bg-dark text-white border-secondary" style="border-color: rgba(255,255,255,0.15) !important; padding: 0.75rem;" placeholder="name@example.com" required>
                 </div>
-                <div class="mb-3">
-                    <label class="form-label fw-semibold">Subject</label>
-                    {{ form.subject }}
+
+                <div class="mb-4">
+                    <label class="form-label text-secondary small fw-semibold">MESSAGE</label>
+                    <textarea name="message" rows="5" class="form-control bg-dark text-white border-secondary" style="border-color: rgba(255,255,255,0.15) !important; padding: 0.75rem;" placeholder="Write your message here..." required></textarea>
                 </div>
-                <div class="mb-3">
-                    <label class="form-label fw-semibold">Message</label>
-                    {{ form.message }}
-                </div>
-                <button type="submit" class="btn btn-primary btn-lg w-100 rounded-pill mt-3">Send Message</button>
+
+                <button type="submit" class="btn btn-warning w-100 fw-bold py-3 rounded-3" style="background: #ffd700; border: none; color: #0c0d0e;">
+                    Send Message <i class="fa-solid fa-paper-plane ms-2"></i>
+                </button>
             </form>
         </div>
     </div>
